@@ -1,6 +1,6 @@
 # Evestatic
 
-TODO: Write a gem description
+A Ruby gem with CCPs EVE-Online static dump data
 
 ## Installation
 
@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+use the source, Luke.
 
 ## Contributing
 
