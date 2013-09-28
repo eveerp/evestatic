@@ -7,6 +7,10 @@ module Evestatic
 
     @@stations = {}
 
+    def self.load!
+      Station.load_from_file(File.expand_path("../../../data/staStations.csv", __FILE__))
+    end
+
     def self.load_from_file(path)
       begin
         CSV.foreach(path, {col_sep: ";", headers: true}) do |row|
@@ -17,6 +21,7 @@ module Evestatic
       end
     end
 
+
     def self.[](key=nil)
       unless key
         @@stations
@@ -25,17 +30,24 @@ module Evestatic
       end
     end
 
-    def initialize(station_id, station_name)
-      self.station_id = station_id
-      self.station_name = station_name
+    def self.by_id(id=nil)
+      Station[id]
+    end
+
+    def self.by_name(name)
+      @@stations.values.collect { |v| v if v.station_name.include? name }.compact[0]
     end
 
     def self.find_by_name(name)
       @@stations.values.collect { |v| v if v.station_name.include? name }.compact
     end
+
+    def initialize(station_id, station_name)      
+      self.station_id = station_id
+      self.station_name = station_name
+    end
+    
+    load!
   end
-
-  puts "loading: staStations"
-  Station.load_from_file(File.expand_path("../../../data/staStations.csv", __FILE__))
-
+  
 end

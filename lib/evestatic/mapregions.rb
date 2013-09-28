@@ -7,6 +7,10 @@ module Evestatic
 
     @@map_regions = {}
 
+    def self.load!
+      MapRegion.load_from_file(File.expand_path("../../../data/mapRegions.csv", __FILE__))
+    end
+
     def self.load_from_file(path)
       begin
         CSV.foreach(path, {col_sep: ";", headers: true}) do |row|
@@ -27,15 +31,23 @@ module Evestatic
     end
 
     def initialize(region_id, region_name)
-      self.region_id = region_id
+            self.region_id = region_id
       self.region_name = region_name
+    end
+
+    def self.by_id(id=nil)
+      @@map_regions[id]
+    end
+
+    def self.by_name(name)
+      @@map_regions.values.collect { |v| v if v.region_name == name }.compact[0]
     end
 
     def self.find_by_name(name)
       @@map_regions.values.collect { |v| v if v.region_name.include? name }.compact
     end
+
+    load!
   end
 
-  puts "loading: mapRegions"
-  MapRegion.load_from_file(File.expand_path("../../../data/mapRegions.csv", __FILE__))
 end

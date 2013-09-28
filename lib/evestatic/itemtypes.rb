@@ -7,6 +7,10 @@ module Evestatic
 
     @@item_types_by_id = {}
     @@item_types_by_name = {}
+
+    def self.load!
+      ItemType.load_from_file(File.expand_path("../../../data/invTypes.csv", __FILE__))
+    end
     
     def self.load_from_file(path)
       begin
@@ -42,15 +46,15 @@ module Evestatic
       end
     end
 
-    def initialize(type_id, group_id, type_name, mass, volume)
+    def initialize(type_id, group_id, type_name, mass, volume)                                                                                          
       self.type_id = type_id
       self.group_id = group_id
       self.type_name = type_name
       self.mass = mass
       self.volume = volume
     end
-  end
 
-  puts "loading: invTypes"
-  ItemType.load_from_file(File.expand_path("../../../data/invTypes.csv", __FILE__))
+    load!
+  end
+  
 end
