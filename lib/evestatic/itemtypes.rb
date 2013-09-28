@@ -42,7 +42,9 @@ module Evestatic
       unless key
         @@item_types_by_name
       else
-        @@item_types_by_name[key] || self.new(key, 0, "UKNOWN TYPE (#{key})",0,0.0)
+        res = @@item_types_by_name[key]
+        raise NameError.new "Type not found #{key}" unless res
+        res
       end
     end
 
