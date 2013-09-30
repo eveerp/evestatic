@@ -3,7 +3,7 @@ require 'csv'
 module Evestatic
   class Station
 
-    attr_accessor :station_id, :station_name
+    attr_accessor :station_id, :station_name, :solarsystem_id, :region_id
 
     @@stations = {}
 
@@ -14,7 +14,7 @@ module Evestatic
     def self.load_from_file(path)
       begin
         CSV.foreach(path, {col_sep: ";", headers: true}) do |row|
-          @@stations[row[0].to_i] = self.new(row[0].to_i, row[11])
+          @@stations[row[0].to_i] = self.new(row[0].to_i, row[11], row[9].to_i, row[10].to_i)
         end
       rescue CSV::MalformedCSVError
         #trololol do nothing, we have all data, dont care if the newlines are windows mess or whatever
@@ -42,9 +42,11 @@ module Evestatic
       @@stations.values.collect { |v| v if v.station_name.include? name }.compact
     end
 
-    def initialize(station_id, station_name)      
+    def initialize(station_id, station_name,solarsystem_id,region_id)
       self.station_id = station_id
       self.station_name = station_name
+      self.solarsystem_id = solarsystem_id
+      self.region_id = region_id
     end
     
     load!
