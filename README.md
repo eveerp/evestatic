@@ -1,6 +1,6 @@
 # Evestatic
 
-A Ruby gem with CCPs EVE-Online static dump data
+A Ruby gem with CCPs EVE-Online static dump data.
 
 ## Installation
 
@@ -16,14 +16,10 @@ Or install it yourself as:
 
     $ gem install evestatic
 
+## Tests
+
+yep, there are specs now. Run `rspec`.
+
 ## Usage
 
 use the source, Luke.
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
